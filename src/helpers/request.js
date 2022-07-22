@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui';
 
 
-axios.defaults.baseURL = '//blog-server.hunger-valley.com';
+axios.defaults.baseURL = '//note-server.hunger-valley.com';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.withCredentials = true
 //一些通用的配置可以在axios.defaults里写好
