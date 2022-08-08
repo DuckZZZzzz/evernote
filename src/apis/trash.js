@@ -1,19 +1,35 @@
-import request from "../helpers/request";
+import request from '@/helpers/request'
+import { friendlyDate } from '@/helpers/util'
 
 const URL = {
-  GET: '/notes/:noteId/confirm',
-  DELETE: '/notes/:noteId/revert',
-  REVERT: '/notes/trash'
+  GET: '/notes/trash',
+  REVERT: '/notes/:noteId/revert',
+  DELETE: '/notes/:noteId/confirm'
 }
 
 export default {
-  get() {
-    return request(URL.GET)
+  getAll() {
+    return new Promise((resolve, reject) => {
+      request(URL.GET)
+        .then(res => {
+          res.data = res.data.sort((note1, note2) => note1.createdAt < note2.createdAt)
+          res.data.forEach(note => {
+            note.createdAtFriendly = friendlyDate(note.createdAt)
+            note.updatedAtFriendly = friendlyDate(note.updatedAt)
+          })
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
+    })
   },
-  delete() {
-    return request(URL.DELETE, 'DELETE')
+
+  deleteNote({ noteId }) {
+    return request(URL.DELETE.replace(':noteId', noteId), 'DELETE')
   },
-  revert() {
-    return request(URL.REVERT, 'PATCH')
+
+  revertNote({ noteId }) {
+    return request(URL.REVERT.replace(':noteId', noteId), 'PATCH')
   }
+
 }

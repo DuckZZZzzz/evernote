@@ -5,17 +5,10 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import store from './store'
+import '../theme/index.css'
 
-// import auth from './apis/auth'
-// import note from './apis/note'
-// import notebook from './apis/notebook'
-// import trash from './apis/trash'
-
-// window.auth = auth
-// window.note = note
-// window.notebook = notebook
-// window.trash = trash
-
+import './assets/css/icon.css'
 
 
 Vue.use(ElementUI);
@@ -27,6 +20,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

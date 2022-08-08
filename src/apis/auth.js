@@ -2,22 +2,25 @@ import request from "../helpers/request";
 
 const URL = {
   REGISTER: '/auth/register',
-  AUTH: '/auth',
+  LOGIN: '/auth/login',
   LOGOUT: '/auth/logout',
-  LOGIN: '/auth/login'
+  GET_INFO: '/auth'
 }
 
 export default {
   register({username, password}) {
-    return request(AUTH.REGISTER, 'POST', {username, password})
+    return request(URL.REGISTER, 'POST', { username, password })
   },
-  auth() {
-    return request(URL.AUTH)
+
+  login({username, password}) {
+    return request(URL.LOGIN, 'POST', { username, password })
   },
+
   logout() {
     return request(URL.LOGOUT)
   },
-  login({username, password}) {
-    return request(URL.LOGIN, 'POST', { username, password })
+
+  getInfo() {
+    return request(URL.GET_INFO)
   }
 }
